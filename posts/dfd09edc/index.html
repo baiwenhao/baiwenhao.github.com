@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+          <head><meta name="generator" content="Hexo 3.9.0">
+        <meta charset="utf-8">
+            
+            <title>
+                jackpack | wenhao blog
+            </title>
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta name="theme-color" content="#4184f3">
+            
+            
+            <link href="/favicon.ico" rel="icon">
+            
+
+            <link rel="stylesheet" href="/css/highlight.light.css">
+            <link rel="stylesheet" href="/css/prism-customize.css">
+            <link rel="stylesheet" href="/css/nav-icon.css">
+            <link rel="stylesheet" href="/css/waves.min.css">
+            <link rel="stylesheet" href="/css/jquery.tocify.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/nav-indicator.css">
+            
+  
+
+  
+            
+        
+    <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+        <header>
+            <!-- cover image or sth. -->
+        </header>
+        <div id="main" class="m-scene">
+            
+<div class="nav-wrapper">
+
+    <div class="container">
+        <nav>
+            <div class="logo wave">
+                <a href="/" id="logo">
+                    wenhao blog
+                </a>
+            </div>
+            <div class="nav-toggle-icon" >
+                <div class="material-hamburger">
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-wrapper">
+                <div class="nav-indicator">
+                </div>
+                <ul class="menus">
+                    
+                     
+                        <li>
+                            <a class="wave " href="/">
+                                首页
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/archives">
+                                归档
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/about">
+                                关于
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave no-smoothstate" href="/atom.xml">
+                                订阅
+                            </a>
+                        </li>
+                     
+                    
+                   
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+            <div class="container content">
+                <div class="scene_element scene_element--fadein">
+                    <div class="row">
+    <div class="main">
+        <article>
+          
+          <header class="post-header">
+          
+          </header>
+          <h1 class="post-title">jackpack</h1>
+
+          <section class="post-info">
+            <span class="post-date">2021/08/18</span>
+            
+            
+          </section>
+
+          <section class="post-content">
+            <h3 id="jackpack-基础-架构-行为-界面"><a href="#jackpack-基础-架构-行为-界面" class="headerlink" title="jackpack 基础 架构 行为 界面"></a>jackpack 基础 架构 行为 界面</h3><h3 id="ViewModel"><a href="#ViewModel" class="headerlink" title="ViewModel"></a>ViewModel</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Activity</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    add1 = findViewById(R.id.button);</span><br><span class="line">    textView = findViewById(R.id.count);</span><br><span class="line">    myViewModel = <span class="keyword">new</span> ViewModelProvider(<span class="keyword">this</span>, <span class="keyword">new</span> ViewModelProvider.NewInstanceFactory()).get(MyViewModel<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="comment">// 触发</span></span><br><span class="line">    add1.setOnClickListener(v -&gt; &#123;</span><br><span class="line">        myViewModel.changeCount(<span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 监听</span></span><br><span class="line">    myViewModel.getCount().observe(<span class="keyword">this</span>, v -&gt; &#123;</span><br><span class="line">        textView.setText(String.valueOf(v));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ViewModel</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewModel</span> <span class="keyword">extends</span> <span class="title">ViewModel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MutableLiveData&lt;Integer&gt; count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MutableLiveData&lt;Integer&gt; <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="keyword">null</span>) &#123;</span><br><span class="line">            count = <span class="keyword">new</span> MutableLiveData&lt;&gt;();</span><br><span class="line">            count.setValue(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeCount</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        count.setValue(count.getValue() + v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="BuildingData"><a href="#BuildingData" class="headerlink" title="BuildingData"></a>BuildingData</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ViewModel 不变</span></span><br><span class="line">dataBinding &#123; enabled <span class="keyword">true</span> &#125; or dataBinding &#123; enabled <span class="keyword">true</span> &#125; <span class="comment">// build.gradle  android 平级后者</span></span><br><span class="line">buildFeatures &#123; dataBinding = <span class="keyword">true</span> &#125; <span class="comment">// ...</span></span><br><span class="line">Convert to data binding layout <span class="comment">// activity_main.xml 页面会多一对 data 标签,自己添加 variable</span></span><br><span class="line">&lt;data&gt;</span><br><span class="line">    &lt;variable</span><br><span class="line">        name=<span class="string">"data"</span></span><br><span class="line">        type=<span class="string">"com.example.demo.MyViewModel"</span> /&gt; <span class="comment">// activity 里就有 ActivityMainBinding 类了</span></span><br><span class="line">&lt;/data&gt;</span><br><span class="line"></span><br><span class="line">&lt;TextView</span><br><span class="line">    android:id=<span class="string">"@+id/count"</span></span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"@&#123;String.valueOf(data.count)&#125;"</span></span><br><span class="line">    android:textColor=<span class="string">"#3F51B5"</span></span><br><span class="line">    android:textSize=<span class="string">"26sp"</span></span><br><span class="line">    app:layout_constraintBottom_toBottomOf=<span class="string">"@+id/guideline2"</span></span><br><span class="line">    app:layout_constraintEnd_toEndOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintHorizontal_bias=<span class="string">"0.498"</span></span><br><span class="line">    app:layout_constraintStart_toStartOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintTop_toTopOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintVertical_bias=<span class="string">"0.549"</span> /&gt;</span><br><span class="line">&lt;Button</span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"-1"</span></span><br><span class="line">    android:onClick=<span class="string">"@&#123;()-&gt;data.changeCount(-1)&#125;"</span></span><br><span class="line">    app:layout_constraintBottom_toTopOf=<span class="string">"@+id/guideline3"</span></span><br><span class="line">    app:layout_constraintEnd_toEndOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintStart_toStartOf=<span class="string">"@+id/guideline"</span></span><br><span class="line">    app:layout_constraintTop_toTopOf=<span class="string">"@+id/guideline2"</span> /&gt;</span><br><span class="line"><span class="comment">// 启动文件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    MyViewModel myViewModel;</span><br><span class="line">    ActivityMainBinding binding;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        binding = DataBindingUtil.setContentView(<span class="keyword">this</span>, R.layout.activity_main); <span class="comment">// 相当于 window 对象</span></span><br><span class="line">        myViewModel = <span class="keyword">new</span> ViewModelProvider(<span class="keyword">this</span>, <span class="keyword">new</span> ViewModelProvider.NewInstanceFactory()).get(MyViewModel<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        binding.setData(myViewModel); <span class="comment">// 反向绑定</span></span><br><span class="line">        binding.setLifecycleOwner(<span class="keyword">this</span>); <span class="comment">// 生命周期</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// guomaotianyue yiqi 5 1201</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 发送自定义广播</span></span><br><span class="line"><span class="comment"> * 注册 触发</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">myBroadcastReceiver = <span class="keyword">new</span> MyBroadcastReceiver();</span><br><span class="line">registerReceiver(myBroadcastReceiver, <span class="keyword">new</span> IntentFilter(<span class="string">"haha"</span>));</span><br><span class="line"></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"haha"</span>);</span><br><span class="line">sendBroadcast(intent);</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyBroadcastReceiver</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        Toast.makeText(context, <span class="string">"show"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ViewModel-SavedState"><a href="#ViewModel-SavedState" class="headerlink" title="ViewModel SavedState"></a>ViewModel SavedState</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          </section>
+        </article>
+        
+
+       
+        <div class="pager">
+          
+            <a class="post-prev pager-item" href="/posts/4837d942/" >
+              <strong class="article-nav-caption">上一篇</strong>
+              <p class="post-nav-title">egg</p>
+            </a>
+          
+          
+            <a class="post-next pager-item" href="/posts/82de9458/">
+              <strong class="article-nav-caption">下一篇</strong>
+              <p class="post-nav-title">ADB</p>
+            </a>
+          
+        </div>
+        
+
+         <!-- comments -->
+        <div class="comment-section">
+  
+    
+
+
+  
+
+
+</div>
+
+    </div>
+    
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <p>
+        &copy; 2024 wenhao blog
+    </p>
+</footer>
+<script src="/lib/jquery.js"></script>
+<script src="/lib/waves.js"></script>
+<script src="/lib/jquery-ui.js"></script>
+<script src="/lib/jquery.tocify.js"></script>
+<script src="/js/main.js"></script>
+
+    </body>
+</html>

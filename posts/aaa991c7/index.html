@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+          <head><meta name="generator" content="Hexo 3.9.0">
+        <meta charset="utf-8">
+            
+            <title>
+                js | wenhao blog
+            </title>
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta name="theme-color" content="#4184f3">
+            
+            
+            <link href="/favicon.ico" rel="icon">
+            
+
+            <link rel="stylesheet" href="/css/highlight.light.css">
+            <link rel="stylesheet" href="/css/prism-customize.css">
+            <link rel="stylesheet" href="/css/nav-icon.css">
+            <link rel="stylesheet" href="/css/waves.min.css">
+            <link rel="stylesheet" href="/css/jquery.tocify.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/nav-indicator.css">
+            
+  
+
+  
+            
+        
+    <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+        <header>
+            <!-- cover image or sth. -->
+        </header>
+        <div id="main" class="m-scene">
+            
+<div class="nav-wrapper">
+
+    <div class="container">
+        <nav>
+            <div class="logo wave">
+                <a href="/" id="logo">
+                    wenhao blog
+                </a>
+            </div>
+            <div class="nav-toggle-icon" >
+                <div class="material-hamburger">
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-wrapper">
+                <div class="nav-indicator">
+                </div>
+                <ul class="menus">
+                    
+                     
+                        <li>
+                            <a class="wave " href="/">
+                                首页
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/archives">
+                                归档
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/about">
+                                关于
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave no-smoothstate" href="/atom.xml">
+                                订阅
+                            </a>
+                        </li>
+                     
+                    
+                   
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+            <div class="container content">
+                <div class="scene_element scene_element--fadein">
+                    <div class="row">
+    <div class="main">
+        <article>
+          
+          <header class="post-header">
+          
+          </header>
+          <h1 class="post-title">js</h1>
+
+          <section class="post-info">
+            <span class="post-date">2017/04/11</span>
+            
+            
+          </section>
+
+          <section class="post-content">
+            <h2 id="LSH-RHS"><a href="#LSH-RHS" class="headerlink" title="LSH RHS"></a>LSH RHS</h2><p>赋值操作的目标是谁LHS<br>谁是赋值操作的源头RHS</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对a的引用是RHS引用,这里并没有对a赋值,而是查找取得a的值传递给log</span></span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对a是LHS引用,实际并不关心当前值是什么,只是想要为=2这个赋值操作找个目标</span></span><br><span class="line">a=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>对变量赋值,使用LHS查询<br>获取变量的值,使用RHS查询</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>作用域是根据名称超找变量的规则<br>嵌套作用域：当一个作用域嵌套在另一个作用域中，就发生了作用域的嵌套，在当前作用域无法找到某个变量，引擎就会在外层作用域继续查找，直到找到该变量或抵达全局作用域为止<br>函数作用域：属于这个函数的全部变量都可以在整个函数的范围内使用及复用<br>词法作用域：书写阶段或者定义时确定的,而动态作用域实在运行时确定的</p>
+<h2 id="IIFE"><a href="#IIFE" class="headerlink" title="IIFE"></a>IIFE</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params">global</span>) </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)(<span class="built_in">window</span>)</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;...&#125;())</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params">def</span>) </span>&#123;</span><br><span class="line">  def(<span class="built_in">window</span>)</span><br><span class="line">&#125;)(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">  <span class="built_in">console</span>.log(a)</span><br><span class="line">  <span class="built_in">console</span>.log(global.a)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>当函数而已记住并访问所在作用域,函数在当前作用域外执行,就产生了闭包<br>try{throw 2;}catch(err){console.log(2)}</p>
+<h2 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;</span><br><span class="line"><span class="keyword">var</span> conf = <span class="built_in">Object</span>.getOwnPropertyDescriptor( obj, <span class="string">'a'</span> ) <span class="comment">// 获取</span></span><br><span class="line">&#123;</span><br><span class="line">  value: <span class="number">2</span>,</span><br><span class="line">  writable: <span class="literal">true</span>,</span><br><span class="line">  enumerable: <span class="literal">true</span>,</span><br><span class="line">  configurable: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">'age'</span>, &#123; <span class="comment">// 设置</span></span><br><span class="line">  value: <span class="number">24</span>,</span><br><span class="line">  writable: <span class="literal">false</span>, <span class="comment">// 是否可修改</span></span><br><span class="line">  enumerable: <span class="literal">false</span>, <span class="comment">// 是否可枚举 (可以出现在对象属性的遍历中)</span></span><br><span class="line">  configurable: <span class="literal">false</span> <span class="comment">// 是否可配置,false是单向操作无法撤销</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="禁止扩展"><a href="#禁止扩展" class="headerlink" title="禁止扩展"></a>禁止扩展</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myObj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(myObj)</span><br></pre></td></tr></table></figure>
+<h2 id="密封-and-冻结"><a href="#密封-and-冻结" class="headerlink" title="密封 and 冻结"></a>密封 and 冻结</h2><p>Object.seal() // 会创建一个密封对象,在现有对象上调用 Object.preventExtensions()把现有属性标记为configurable: false<br>不能添加,删除可以修改<br>冻结是调用Object.freeze()，是在现有对象上调用Object.seal()</p>
+<h2 id="Getter-和-Setter"><a href="#Getter-和-Setter" class="headerlink" title="Getter 和 Setter"></a>Getter 和 Setter</h2><p>访问描述符和数据描述符，对于描述符来说，js会忽略他们的value和writable特性<br>取而代之的是set和get，还有configurable和enumerable<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="keyword">get</span> a () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._a</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span> a (v) &#123;</span><br><span class="line">    <span class="keyword">this</span>._a = v * <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.a = <span class="number">2</span> <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'b'</span>, &#123;</span><br><span class="line">  value: <span class="number">5</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log((<span class="string">'b'</span> <span class="keyword">in</span> obj)) <span class="comment">// true (in回去查找原型)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj)) <span class="comment">// [](返回可枚举属性)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.propertyIsEnumerable(<span class="string">'b'</span>)) <span class="comment">// false (返回所有属性)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(obj)) <span class="comment">// ['b'](返回所有属性)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Object-对象"><a href="#Object-对象" class="headerlink" title="Object 对象"></a>Object 对象</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 寄生继承</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vehicle</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.engines = <span class="string">'wenhao'</span></span><br><span class="line">&#125;</span><br><span class="line">Vehicle.prototype.ignition = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'my engine'</span>)</span><br><span class="line">&#125;</span><br><span class="line">Vehicle.prototype.drive = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.ignition()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setting'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Car</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> car = <span class="keyword">new</span> Vehicle()</span><br><span class="line">  car.wheels = <span class="number">4</span></span><br><span class="line">  <span class="keyword">var</span> vehDrive = car.drive</span><br><span class="line">  car.drive = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    vehDrive.call(<span class="keyword">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'rolling'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> car</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 检索现有对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(目标对象的原型对象) === app.prototype;</span><br><span class="line">原型.isPrototypeOf(实例)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把E委托到D</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(E, D) <span class="comment">// 返回E对象 E的proto指向D</span></span><br></pre></td></tr></table></figure>
+<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 截取长度</span></span><br><span class="line"><span class="number">10.</span>.toFixed(<span class="number">2</span>)</span><br><span class="line"><span class="number">10</span> .toFixed(<span class="number">2</span>)</span><br><span class="line"><span class="number">10.</span>.toPrecision(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 浮点数比大小 polyfill</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Number</span>.EPSILON) &#123;</span><br><span class="line">  <span class="built_in">Number</span>.EPSILON = <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">-52</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span> (<span class="params">n1, n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.abs(n1, n2) &lt; <span class="built_in">Number</span>.EPSILON</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最大整数</span></span><br><span class="line"><span class="built_in">Number</span>.MAX_SAFE_INTEGER</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最小整数</span></span><br><span class="line"><span class="built_in">Number</span>.MIN_SAFE_INTEGER</span><br><span class="line"></span><br><span class="line"><span class="comment">// 整数判断</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">42.000</span>) <span class="comment">// true</span></span><br><span class="line">n % <span class="number">1</span> === <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断两个值是否绝对相等 (特殊的相对比较)</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="number">0</span>, <span class="number">-0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Function-and-Object"><a href="#Function-and-Object" class="headerlink" title="Function and Object"></a>Function and Object</h3><p><a href="http://www.cnblogs.com/shuiyi/p/5343399.html" target="_blank" rel="noopener">http://www.cnblogs.com/shuiyi/p/5343399.html</a></p>
+<h3 id="编码-解码"><a href="#编码-解码" class="headerlink" title="编码 解码"></a>编码 解码</h3><p><a href="http://www.cnblogs.com/shuiyi/p/5277233.html#3979662" target="_blank" rel="noopener">http://www.cnblogs.com/shuiyi/p/5277233.html#3979662</a></p>
+<h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2><p>// 这两者可以将浮点转成整型且效率方面要比同类的parseInt,Math.round 要快。在处理像素及动画位移等效果的时候会很有用<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="number">12.4</span> / <span class="number">4.13</span>) | <span class="number">0</span>;<span class="comment">//结果为3</span></span><br><span class="line"><span class="keyword">var</span> bar = ~~(<span class="number">12.4</span> / <span class="number">4.13</span>); <span class="comment">//结果为3</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>,b=<span class="number">2</span>;a=[b,b=a][<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p>
+<p>javascript 变量命名类型 变量命名前缀<br>array 数组  a<br>boolean 布尔值 b<br>float 浮点数 l<br>function 函数 fn<br>int 整型  i<br>object 对象 o<br>regular 正则  r<br>string 字符串  s</p>
+<h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><p>不支持属性 width and height so padding 和 line-height 替代<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.assert(!true, &apos;This is not true&apos;) 错误答应</span><br><span class="line">console.profile(&apos;神机妙算&apos;)</span><br><span class="line">console.profileEnd(&apos;神机妙算&apos;)</span><br><span class="line">console.time()</span><br><span class="line">console.timeEnd()</span><br><span class="line">console.count() 统计函数执行的次数</span><br><span class="line">console.table()</span><br><span class="line">console.info()</span><br><span class="line">console.warn()</span><br><span class="line">console.error()</span><br><span class="line"></span><br><span class="line">console.log(&apos;%c Welcome to XIYU! &apos;,&apos;color:#1e80ff;font-size:20px;background:#fff;padding:8px;&apos;);</span><br><span class="line">console.log(&apos;%c想要加入稀土掘金？投递简历：https://job.toutiao.com/s/idq6X5rb&apos;, &apos;color:#1e80ff;&apos;);</span><br><span class="line">/* --- style --- */</span><br><span class="line">console.log(</span><br><span class="line">  &quot;Multiple styles: %cred %corange&quot;,</span><br><span class="line">  &quot;color: red&quot;,</span><br><span class="line">  &quot;color: orange&quot;,</span><br><span class="line">  &quot;Additional unformatted message&quot;,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">/* --- img --- */</span><br><span class="line">console.log(&apos;%c &apos;, &apos;padding-left: 50px; line-height: 50px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAANlBMVEVHcEwzMjQvJjgxJDcvJDgwJThRNTmfxWgy2SbD9nmh8GaOP121TVnCPS/qRCvtXj3ym2j2tXmABwdyAAAABXRSTlMABTvE+i919boAAAMySURBVHgB7dzLTsNmFIXR+BqKYwLv/7KlUsWkZ9P+lS3H1vrIFEssHXmyFW6vVdcP47RB49B3tysECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAATqeog7Qz6mEhrmtiwJ1/RC6h95C1wUaq6b5/kfZewKarws0VQH6HWgG5IJyLsgFuSAX5IJckAtyQYBckAtyQS7IBbkgF+SCAAHq6rYDGqsC0AX2r6UVaAj13cn3r7fQew10n+uG4N91Z9+/WoHyuyZ07pfxhkCtEoAAAQIECBAgQIAAAQIECBAgQIAAAQIE6LL71/5AdWfZvxLQdK997qEANA19qDvJ/jUGn3l5lC1zaKob83B4iv1rbAeaprn4+aWx6hWBplAz0AYBAgQIECBAgAABAgQIECBAVwACBAgQIECAAHV1LwhUd5r/f7j8pfGPzzdQmDXmto7ay/L3v9bQsnNr6KC9LH//a/2oe4RaIR6hj7r1oK9q5q395YCmqkOBAAECBAgQIEAhQA0+gAAt1wRyQYAAAQIECBAgQIC6sisA1e29fy0J6Pl4Pn4+WWhzoOa9bOf9K/p8hh7fv/HfP+2172U7718R6Kvs8/lxQFvtZfllfAGgqepCQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECNAzFIFCVwWK+9dX6DP0vCzQ1yYB+g4QIECAAAECBAgQIECAAAECBAgQIECAAAECZPZZTz8cbkbxqFtMz4AA/b8AAQIECBAgQIAAAQIECBAgQIAAAQIECBCgEKC/+5f9C1AOECBAgAABAgQIECBAgAABAgQIECBAgAABAgQI0AooXEroykCAAAECBAgQIECAAAECBAgQIECAAAECBAgQoLLzA41VCSjXD6FlLWt2W0Ot+1eUCA2hVqCuDw1zXetfNofWrS6lbujruuyTjYqa300ZaMrP2fddE7pt0hWAbjsFCBAgQIAAAQIECBAgQNsHCBAgQIAAAQIEqKwdKD/n+P0rt/Velmt9ztLYENobqG0vyw1tz8ntvn/tuZfl4j6Vn5Nr3L8OqRkonPqGQFtKAAIECBAgQIAAAQIECBAgQIAAAQIECBCg4wME6E+7tQcAK80eGwAAAABJRU5ErkJggg==) 100% / contain no-repeat;&apos;);</span><br><span class="line"></span><br><span class="line">/* --- html and svg --- */</span><br><span class="line">console.log(&apos;%c &apos;, `</span><br><span class="line">line-height:100px;</span><br><span class="line">padding-left:400px;</span><br><span class="line">background-repeat:no-repeat;</span><br><span class="line">background-image:url(&quot;data:image/svg+xml,&lt;svg viewBox=&apos;0 0 400 100&apos; xmlns=&apos;http://www.w3.org/2000/svg&apos;&gt;&lt;style&gt;path&#123;stroke-dasharray: 400;animation: dash 10s linear;&#125;@keyframes dash &#123;to &#123;stroke-dashoffset: 2000;&#125;&#125;&lt;/style&gt;&lt;path d=&apos;M 0 50 Q 50 100 100 50 T 200 50 T 300 50 T 400 50 T 500 50&apos; stroke=&apos;black&apos; fill=&apos;transparent&apos; stroke-width=&apos;10&apos;&gt;&lt;/path&gt;&lt;/svg&gt;&quot;)</span><br><span class="line">`)</span><br><span class="line"></span><br><span class="line">/* --- animate --- */</span><br><span class="line">console.log(&apos;%c &apos;, `</span><br><span class="line">line-height:100px;</span><br><span class="line">padding-left:100px;</span><br><span class="line">background-repeat:no-repeat;</span><br><span class="line">background-image:url(&quot;data:image/svg+xml,&lt;svg width=&apos;100&apos; height=&apos;100&apos; xmlns=&apos;http://www.w3.org/2000/svg&apos;&gt;&lt;style&gt;@keyframes spin &#123;0% &#123; transform: rotate(0deg); background: green; border-radius: 5px; &#125;50% &#123; transform: rotate(180deg); background: red; border-radius: 20px; &#125;100% &#123; transform: rotate(360deg); background: green; border-radius: 5px; &#125;&#125;.square &#123;width: 50px;height: 50px;position: relative;left: 25px;top: 25px;background-color: red;animation: spin 2s linear infinite;&#125;&lt;/style&gt;&lt;foreignObject width=&apos;100&apos; height=&apos;100&apos;&gt;&lt;div xmlns=&apos;http://www.w3.org/1999/xhtml&apos; class=&apos;square&apos;&gt;&lt;/div&gt;&lt;/foreignObject&gt;&lt;/svg&gt;&quot;)</span><br><span class="line">`)</span><br></pre></td></tr></table></figure></p>
+
+          </section>
+        </article>
+        
+
+       
+        <div class="pager">
+          
+            <a class="post-prev pager-item" href="/posts/feee8227/" >
+              <strong class="article-nav-caption">上一篇</strong>
+              <p class="post-nav-title">this</p>
+            </a>
+          
+          
+            <a class="post-next pager-item" href="/posts/b9f20a20/">
+              <strong class="article-nav-caption">下一篇</strong>
+              <p class="post-nav-title">webpack</p>
+            </a>
+          
+        </div>
+        
+
+         <!-- comments -->
+        <div class="comment-section">
+  
+    
+
+
+  
+
+
+</div>
+
+    </div>
+    
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <p>
+        &copy; 2024 wenhao blog
+    </p>
+</footer>
+<script src="/lib/jquery.js"></script>
+<script src="/lib/waves.js"></script>
+<script src="/lib/jquery-ui.js"></script>
+<script src="/lib/jquery.tocify.js"></script>
+<script src="/js/main.js"></script>
+
+    </body>
+</html>

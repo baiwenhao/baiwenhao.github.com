@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+          <head><meta name="generator" content="Hexo 3.9.0">
+        <meta charset="utf-8">
+            
+            <title>
+                egg | wenhao blog
+            </title>
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta name="theme-color" content="#4184f3">
+            
+            
+            <link href="/favicon.ico" rel="icon">
+            
+
+            <link rel="stylesheet" href="/css/highlight.light.css">
+            <link rel="stylesheet" href="/css/prism-customize.css">
+            <link rel="stylesheet" href="/css/nav-icon.css">
+            <link rel="stylesheet" href="/css/waves.min.css">
+            <link rel="stylesheet" href="/css/jquery.tocify.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/nav-indicator.css">
+            
+  
+
+  
+            
+        
+    <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+        <header>
+            <!-- cover image or sth. -->
+        </header>
+        <div id="main" class="m-scene">
+            
+<div class="nav-wrapper">
+
+    <div class="container">
+        <nav>
+            <div class="logo wave">
+                <a href="/" id="logo">
+                    wenhao blog
+                </a>
+            </div>
+            <div class="nav-toggle-icon" >
+                <div class="material-hamburger">
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-wrapper">
+                <div class="nav-indicator">
+                </div>
+                <ul class="menus">
+                    
+                     
+                        <li>
+                            <a class="wave " href="/">
+                                首页
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/archives">
+                                归档
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/about">
+                                关于
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave no-smoothstate" href="/atom.xml">
+                                订阅
+                            </a>
+                        </li>
+                     
+                    
+                   
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+            <div class="container content">
+                <div class="scene_element scene_element--fadein">
+                    <div class="row">
+    <div class="main">
+        <article>
+          
+          <header class="post-header">
+          
+          </header>
+          <h1 class="post-title">egg</h1>
+
+          <section class="post-info">
+            <span class="post-date">2022/12/08</span>
+            
+            
+          </section>
+
+          <section class="post-content">
+            <h2 id="EGG"><a href="#EGG" class="headerlink" title="EGG"></a>EGG</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 开启</span></span><br><span class="line">config.security = &#123;</span><br><span class="line">    csrf: &#123;</span><br><span class="line">        enable: <span class="literal">true</span>,</span><br><span class="line">        headerName: <span class="string">'x-csrf-token'</span>,</span><br><span class="line">        cookieName: <span class="string">'csrf-token'</span>,</span><br><span class="line">        cookieOptions: &#123;</span><br><span class="line">            sameSite: <span class="string">'Strict'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    domainWhiteList: [ <span class="string">'.abc.com'</span> ],</span><br><span class="line">&#125;;</span><br><span class="line">config.onerror = &#123;</span><br><span class="line">  html(err, ctx) &#123;</span><br><span class="line">    ctx.status = <span class="number">500</span>;</span><br><span class="line">    ctx.body = <span class="string">`&lt;h1&gt;Rainbow CMS Error: <span class="subst">$&#123;ctx.status&#125;</span>&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;hr /&gt;&lt;p&gt;Message: <span class="subst">$&#123;<span class="built_in">escape</span>(err.message)&#125;</span>&lt;/p&gt;`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="SameSite"><a href="#SameSite" class="headerlink" title="SameSite"></a>SameSite</h2><p>SameSite=None：无论是否跨站都会发送 Cookie<br>SameSite=Lax：允许部分第三方请求携带 Cookie<br>SameSite=Strict：仅允许同站请求携带 Cookie，即当前网页 URL 与请求目标 URL 完全一致<br>  https 成功 http 不行</p>
+<h2 id="Secure"><a href="#Secure" class="headerlink" title="Secure"></a>Secure</h2><p>Cookie 只有在 HTTPS 协议下才会发送给服务<br>true, false</p>
+<h2 id="HttpOnly"><a href="#HttpOnly" class="headerlink" title="HttpOnly"></a>HttpOnly</h2><p>Cookie 将无法被 JavaScript 访问，从而避免 XSS 攻击</p>
+
+          </section>
+        </article>
+        
+
+       
+        <div class="pager">
+          
+            <a class="post-prev pager-item" href="/posts/7f8a2577/" >
+              <strong class="article-nav-caption">上一篇</strong>
+              <p class="post-nav-title">Software collection</p>
+            </a>
+          
+          
+            <a class="post-next pager-item" href="/posts/dfd09edc/">
+              <strong class="article-nav-caption">下一篇</strong>
+              <p class="post-nav-title">jackpack</p>
+            </a>
+          
+        </div>
+        
+
+         <!-- comments -->
+        <div class="comment-section">
+  
+    
+
+
+  
+
+
+</div>
+
+    </div>
+    
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <p>
+        &copy; 2024 wenhao blog
+    </p>
+</footer>
+<script src="/lib/jquery.js"></script>
+<script src="/lib/waves.js"></script>
+<script src="/lib/jquery-ui.js"></script>
+<script src="/lib/jquery.tocify.js"></script>
+<script src="/js/main.js"></script>
+
+    </body>
+</html>

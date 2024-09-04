@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+          <head><meta name="generator" content="Hexo 3.9.0">
+        <meta charset="utf-8">
+            
+            <title>
+                ADB | wenhao blog
+            </title>
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta name="theme-color" content="#4184f3">
+            
+            
+            <link href="/favicon.ico" rel="icon">
+            
+
+            <link rel="stylesheet" href="/css/highlight.light.css">
+            <link rel="stylesheet" href="/css/prism-customize.css">
+            <link rel="stylesheet" href="/css/nav-icon.css">
+            <link rel="stylesheet" href="/css/waves.min.css">
+            <link rel="stylesheet" href="/css/jquery.tocify.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/nav-indicator.css">
+            
+  
+
+  
+            
+        
+    <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+        <header>
+            <!-- cover image or sth. -->
+        </header>
+        <div id="main" class="m-scene">
+            
+<div class="nav-wrapper">
+
+    <div class="container">
+        <nav>
+            <div class="logo wave">
+                <a href="/" id="logo">
+                    wenhao blog
+                </a>
+            </div>
+            <div class="nav-toggle-icon" >
+                <div class="material-hamburger">
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-wrapper">
+                <div class="nav-indicator">
+                </div>
+                <ul class="menus">
+                    
+                     
+                        <li>
+                            <a class="wave " href="/">
+                                首页
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/archives">
+                                归档
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave " href="/about">
+                                关于
+                            </a>
+                        </li>
+                     
+                        <li>
+                            <a class="wave no-smoothstate" href="/atom.xml">
+                                订阅
+                            </a>
+                        </li>
+                     
+                    
+                   
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+            <div class="container content">
+                <div class="scene_element scene_element--fadein">
+                    <div class="row">
+    <div class="main">
+        <article>
+          
+          <header class="post-header">
+          
+          </header>
+          <h1 class="post-title">ADB</h1>
+
+          <section class="post-info">
+            <span class="post-date">2021/06/07</span>
+            
+            
+          </section>
+
+          <section class="post-content">
+            <h2 id="mac-设置外置网卡"><a href="#mac-设置外置网卡" class="headerlink" title="mac 设置外置网卡"></a>mac 设置外置网卡</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IP: 192.168.1.5</span><br><span class="line">子网掩码: 255.255.255.0</span><br><span class="line">路由器: 192.168.1.4</span><br><span class="line"></span><br><span class="line">// install uninstall 的方式</span><br><span class="line">ssh root@192.168.1.4</span><br><span class="line">pwd: root</span><br><span class="line">cd /var/</span><br><span class="line">enable_androidDB.sh</span><br><span class="line"></span><br><span class="line">adb connect 192.168.1.4:5555</span><br><span class="line">adb install -t /Users/wenhao/workSpace/ezia-fueling-fe-fueling/app/build/outputs/apk/debug/app-debug.apk</span><br><span class="line"></span><br><span class="line">// 重启</span><br><span class="line">adb shell</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">adbkill-server 重启</span><br><span class="line">adb start-server</span><br><span class="line">adb kill-server</span><br><span class="line">adb version</span><br><span class="line">adb root</span><br><span class="line">adb install</span><br><span class="line">adb shell am start</span><br><span class="line">adb devices</span><br><span class="line">adb -s <span class="number">10.129</span><span class="number">.164</span><span class="number">.6</span>:<span class="number">5555</span> install test.apk</span><br><span class="line">adb tcpip <span class="number">5555</span> <span class="comment">// 无线连接的端口</span></span><br><span class="line">adb connect <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span>:<span class="number">5555</span> <span class="comment">// 通过ip地址链接设备（关于手机，状态信息）</span></span><br><span class="line">adb -s <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span>:<span class="number">5555</span> shell wm size <span class="comment">// 获取屏幕分辨率</span></span><br><span class="line">adb devices 确认链接状态（&lt;device-ip-address&gt;:<span class="number">5555</span> device）链接成功</span><br><span class="line">adb kill-server 在重来</span><br><span class="line">adb disconnect &lt;device-ip-address&gt; <span class="comment">// 断开无线链接</span></span><br><span class="line"></span><br><span class="line">adb shell pm list packages <span class="comment">// 所有应用</span></span><br><span class="line">adb shell pm list packages -s <span class="comment">// 系统</span></span><br><span class="line">adb shell pm list packages <span class="number">-3</span> <span class="comment">// 第三方</span></span><br><span class="line"></span><br><span class="line">adb uninstall packagename <span class="comment">// 卸载</span></span><br><span class="line">adb shell pm clear packagename <span class="comment">// 清空缓存</span></span><br><span class="line">adb shell dumpsys packagename <span class="comment">// 查看详情</span></span><br><span class="line">https:<span class="comment">//www.jianshu.com/p/2e98a5c0ec1e</span></span><br><span class="line"></span><br><span class="line">adb remount</span><br><span class="line">adb install -t /Users/wenhao/workSpace/ezia-fueling-fe-fueling/app/build/outputs/apk/debug/app-debug.apk</span><br><span class="line">安装失败</span><br><span class="line"></span><br><span class="line">冷启动</span><br><span class="line">adb shell am start -S -W com.maezia.fawmqb.carwash/com.ezia.fawmqb.carwash.main.MainActivity</span><br></pre></td></tr></table></figure>
+<h3 id="log"><a href="#log" class="headerlink" title="log"></a>log</h3><p>adb logcat -c<br>adb logcat &gt;log.txt</p>
+<p>保存日志<br>adb logcat -v time &gt;D:\log.txt</p>
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>adb push /app-debug.apk system/priv-app/<br>adb push system/priv-app/fueling.apk ./</p>
+<h3 id="提权限-安装删除权限"><a href="#提权限-安装删除权限" class="headerlink" title="提权限 安装删除权限"></a>提权限 安装删除权限</h3><p>ssh 连接上<br>cd /var/<br>sh disable-dm-verity.sh</p>
+
+          </section>
+        </article>
+        
+
+       
+        <div class="pager">
+          
+            <a class="post-prev pager-item" href="/posts/dfd09edc/" >
+              <strong class="article-nav-caption">上一篇</strong>
+              <p class="post-nav-title">jackpack</p>
+            </a>
+          
+          
+            <a class="post-next pager-item" href="/posts/92bcb62d/">
+              <strong class="article-nav-caption">下一篇</strong>
+              <p class="post-nav-title">android</p>
+            </a>
+          
+        </div>
+        
+
+         <!-- comments -->
+        <div class="comment-section">
+  
+    
+
+
+  
+
+
+</div>
+
+    </div>
+    
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <p>
+        &copy; 2024 wenhao blog
+    </p>
+</footer>
+<script src="/lib/jquery.js"></script>
+<script src="/lib/waves.js"></script>
+<script src="/lib/jquery-ui.js"></script>
+<script src="/lib/jquery.tocify.js"></script>
+<script src="/js/main.js"></script>
+
+    </body>
+</html>
